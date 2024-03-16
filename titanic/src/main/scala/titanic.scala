@@ -5,14 +5,11 @@ case class Passenger(id: Int, survive: Boolean, cabinClass: Int, name: String, s
                      sibsp: Int, parchl: Int, ticketNo: String, Fare: Float)
 
 object Titanic  extends App{
-  val file = new File("/home/bartosz/bigdata/Parser/parser/src/main/resources/titanic.csv")
+  val file = new File("src/main/resources/titanic.csv")
 
   def parse(file: File): List[Passenger] = {
 
-    def survive(binary: String): Boolean = {
-      (binary == "1")
 
-    }
     try {
       val reader = CSVReader.open(file)
 
@@ -22,7 +19,7 @@ object Titanic  extends App{
         .map(fields => try {
           Some(Passenger(
             fields.head.toInt,
-            survive(fields(1)),
+            (fields(1) == "1"),
             fields(2).toInt,
             fields(3),
             fields(4),
@@ -35,7 +32,7 @@ object Titanic  extends App{
         } catch {
           case _: Throwable => None
         })
-        .collect { case Some(passenger) => passenger } 
+        .collect { case Some(passenger) => passenger }
         .toList
 
       reader.close()
