@@ -15,7 +15,6 @@ object Titanic  extends App{
     try {
       val reader = CSVReader.open(file)
 
-      // Pomiń nagłówki, jeśli istnieją
       reader.readNext()
       val collectionOfPassengers: List[Passenger] = reader
         .toStream
@@ -34,7 +33,6 @@ object Titanic  extends App{
     }
   }
 
-  // Wywołanie funkcji parse i przetworzenie pasażerów
   val passengers = parse(file)
   passengers.foreach(println)
 }
