@@ -16,23 +16,24 @@ object Titanic  extends App{
       reader.readNext()
       val collectionOfPassengers: List[Passenger] = reader
         .toStream
-        .map(fields => try {
-          Some(Passenger(
-            fields.head.toInt,
-            (fields(1) == "1"),
-            fields(2).toInt,
-            fields(3),
-            fields(4),
-            fields(5).toInt,
-            fields(6).toInt,
-            fields(7).toInt,
-            fields(8),
-            fields(9).toFloat
-          ))
-        } catch {
-          case _: Throwable => None
-        })
-        .collect { case Some(passenger) => passenger }
+        .flatMap { fields =>
+          try {
+            Some(Passenger(
+              fields.head.toInt,
+              fields(1) == "1",
+              fields(2).toInt,
+              fields(3),
+              fields(4),
+              fields(5).toInt,
+              fields(6).toInt,
+              fields(7).toInt,
+              fields(8),
+              fields(9).toFloat
+            ))
+          } catch {
+            case _: Throwable => None
+          }
+        }
         .toList
 
       reader.close()
