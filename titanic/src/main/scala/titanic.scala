@@ -47,4 +47,17 @@ object Titanic  extends App{
 
   val passengers = parse(file)
   passengers.foreach(println)
+  def avgAge(titanic: List[Passenger]): Unit = {
+    val man = titanic.filter(_.sex == "male")
+    val sur = man.filter(_.survive == false)
+    val totalAge = sur.map(_.age).sum
+    val avgAge = totalAge / sur.length
+    println(avgAge)
+  }
+  def sexSum(titanic: List[Passenger]): Unit = {
+    val man = titanic.count(_.sex != "male")
+    println(man)
+  }
+  sexSum(passengers)
+
 }
