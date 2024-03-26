@@ -9,6 +9,7 @@ object Titanic  extends App{
   def parse(file: File): List[Passenger] = {
 
 
+
     try {
       val reader = CSVReader.open(file)
 
@@ -45,5 +46,11 @@ object Titanic  extends App{
   }
 
   val passengers = new titanicClass(parse(file))
-  println(passengers.byAgeNumber(50).length)
+  val women = new titanicClass(passengers.byGender("female"))
+  val men = new titanicClass(passengers.byGender("male"))
+  val menSurvive = new titanicClass(passengers.survive())
+  val womenSurvive = new titanicClass(women.survive())
+
+  println(women.len())
+  println(men.names())
 }
