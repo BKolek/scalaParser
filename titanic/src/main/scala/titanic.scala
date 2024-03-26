@@ -1,8 +1,7 @@
 import com.github.tototoshi.csv.CSVReader
 import java.io.File
 import com.github.tototoshi.csv.defaultCSVFormat
-case class Passenger(id: Int, survive: Boolean, cabinClass: Int, name: String, sex: String, age: Int,
-                     sibsp: Int, parchl: Int, ticketNo: String, Fare: Float)
+
 
 object Titanic  extends App{
   val file = new File("src/main/resources/titanic.csv")
@@ -45,6 +44,6 @@ object Titanic  extends App{
     }
   }
 
-  val passengers = parse(file)
-  passengers.foreach(println)
+  val passengers = new titanicClass(parse(file))
+  println(passengers.byAgeNumber(50).length)
 }
