@@ -63,7 +63,7 @@ object Titanic  extends App{
   // tylko ludzie ktorzy byli starsi niz 69 lat i przezyli oraz byli posiadaczami biletu pierwszej klasy
   val elderlySurvivedFirstClass: titanicClass = new titanicClass(firstClass.byAge(70, 100))
   // mozna zrobic duzo wiecej kombinacji
-  
+
 
   println(thirdClassSurvive.len().toFloat / thirdClass.len().toFloat * 100 + " %")
   println(firstClassSurvive.len().toFloat / firstClass.len().toFloat * 100 + " %")
