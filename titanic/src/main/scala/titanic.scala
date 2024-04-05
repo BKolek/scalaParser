@@ -4,14 +4,14 @@ import com.github.tototoshi.csv.defaultCSVFormat
 
 
 object Titanic  extends App{
-  val file = new File("src/main/resources/titanic.csv")
+  val file: File = new File("src/main/resources/titanic.csv")
 
   def parse(file: File): List[Passenger] = {
 
 
 
     try {
-      val reader = CSVReader.open(file)
+      val reader: CSVReader = CSVReader.open(file)
 
       reader.readNext()
       val collectionOfPassengers: List[Passenger] = reader
@@ -45,12 +45,20 @@ object Titanic  extends App{
     }
   }
 
-  val passengers = new titanicClass(parse(file))
-  val women = new titanicClass(passengers.byGender("female"))
-  val men = new titanicClass(passengers.byGender("male"))
-  val menSurvive = new titanicClass(passengers.survive())
-  val womenSurvive = new titanicClass(women.survive())
-
-  println(women.len())
-  println(men.names())
+  val passengers: titanicClass = new titanicClass(parse(file))
+  val women: titanicClass = new titanicClass(passengers.byGender("female"))
+  val men: titanicClass = new titanicClass(passengers.byGender("male"))
+  val menSurvive: titanicClass = new titanicClass(men.survive())
+  val womenSurvive: titanicClass = new titanicClass(women.survive())
+  val adults: titanicClass = new titanicClass(passengers.byAge(18, 100))
+  val firstClass: titanicClass = new titanicClass(passengers.byCabinClass(1))
+  val thirdClass: titanicClass = new titanicClass(passengers.byCabinClass(3))
+  val firstClassSurvive: titanicClass = new titanicClass(firstClass.survive())
+  val thirdClassSurvive: titanicClass = new titanicClass(thirdClass.survive())
+  val children: titanicClass = new titanicClass(passengers.byAge(0, 18))
+  val childrenFirstClass: titanicClass = new titanicClass(children.byCabinClass(1))
+  val childrenThirdClass: titanicClass = new titanicClass(children.byCabinClass(3))
+  println(thirdClassSurvive.len().toFloat / thirdClass.len().toFloat * 100 + " %")
+  println(firstClassSurvive.len().toFloat / firstClass.len().toFloat * 100 + " %")
+  println(childrenThirdClass.len())
 }
