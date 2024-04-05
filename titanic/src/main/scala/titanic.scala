@@ -44,7 +44,7 @@ object Titanic  extends App{
         List.empty[Passenger]
     }
   }
-
+  def percentage(up: Int, down: Int): Float = (up.toFloat / down.toFloat) * 100
   val passengers: titanicClass = new titanicClass(parse(file))
   // mezczyzni i kobiety odfiltrowani
   val women: titanicClass = new titanicClass(passengers.byGender("female"))
@@ -54,6 +54,7 @@ object Titanic  extends App{
   val womenSurvive: titanicClass = new titanicClass(women.survive())
   // tylko dorosli
   val adults: titanicClass = new titanicClass(passengers.byAge(18, 100))
+  val adultsSurvived: titanicClass = new titanicClass(adults.survive())
   // podzial na klasy
   val firstClass: titanicClass = new titanicClass(passengers.byCabinClass(1))
   val thirdClass: titanicClass = new titanicClass(passengers.byCabinClass(3))
@@ -65,7 +66,6 @@ object Titanic  extends App{
   // mozna zrobic duzo wiecej kombinacji
 
 
-  println(thirdClassSurvive.len().toFloat / thirdClass.len().toFloat * 100 + " %")
-  println(firstClassSurvive.len().toFloat / firstClass.len().toFloat * 100 + " %")
+  val adultsSurvivalChance: Float = percentage(adultsSurvived.len(), adults.len())
 
 }
