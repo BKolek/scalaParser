@@ -46,19 +46,26 @@ object Titanic  extends App{
   }
 
   val passengers: titanicClass = new titanicClass(parse(file))
+  // mezczyzni i kobiety odfiltrowani
   val women: titanicClass = new titanicClass(passengers.byGender("female"))
   val men: titanicClass = new titanicClass(passengers.byGender("male"))
+  // ci ktorzy przezyli
   val menSurvive: titanicClass = new titanicClass(men.survive())
   val womenSurvive: titanicClass = new titanicClass(women.survive())
+  // tylko dorosli
   val adults: titanicClass = new titanicClass(passengers.byAge(18, 100))
+  // podzial na klasy
   val firstClass: titanicClass = new titanicClass(passengers.byCabinClass(1))
   val thirdClass: titanicClass = new titanicClass(passengers.byCabinClass(3))
+  // podzial na klasy tych co przezyli
   val firstClassSurvive: titanicClass = new titanicClass(firstClass.survive())
   val thirdClassSurvive: titanicClass = new titanicClass(thirdClass.survive())
-  val children: titanicClass = new titanicClass(passengers.byAge(0, 18))
-  val childrenFirstClass: titanicClass = new titanicClass(children.byCabinClass(1))
-  val childrenThirdClass: titanicClass = new titanicClass(children.byCabinClass(3))
+  // tylko ludzie ktorzy byli starsi niz 69 lat i przezyli oraz byli posiadaczami biletu pierwszej klasy
+  val elderlySurvivedFirstClass: titanicClass = new titanicClass(firstClass.byAge(70, 100))
+  // mozna zrobic duzo wiecej kombinacji
+  
+
   println(thirdClassSurvive.len().toFloat / thirdClass.len().toFloat * 100 + " %")
   println(firstClassSurvive.len().toFloat / firstClass.len().toFloat * 100 + " %")
-  println(childrenThirdClass.len())
+
 }
